@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  postgres:
+    ports:
+      - '5432:5432'
+
+  app:
+    # Map ports to access the application from your browser/Postman
+    ports:
+      - '3000:3000' # Application port
+      - '9229:9229' # Debug port
+    # Override the Dockerfile's CMD to run in development mode (hot-reload)
+    command: npm run start:dev
+    # Mount volumes to sync the source code and avoid installing node_modules locally
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      # Load environment variables from the .env file
+      DATABASE_URL: ${DATABASE_URL}
