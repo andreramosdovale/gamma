@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database Service
+  postgres:
+    image: postgres:16-alpine
+    container_name: gamma_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      # Mount a named volume to persist database data
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - gamma-network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Application Service
+  app:
+    build: . # Build the image from the Dockerfile in the root directory
+    container_name: gamma_app
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - gamma-network
+
+# Define the network containers will use to communicate
+networks:
+  gamma-network:
+    driver: bridge
+
+# Define the volume for Postgres data persistence
+volumes:
+  postgres_data:
+    driver: local
