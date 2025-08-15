@@ -1,0 +1,55 @@
+# Workflow name
+name: Gamma Project - CI Pipeline
+
+# Triggers
+on:
+  # Run the pipeline on pushes to the main branch
+  push:
+    branches: ['main', 'develop']
+  # Run the pipeline on Pull Requests targeting the main branch
+  pull_request:
+    branches: ['main', 'develop']
+
+# Permissions for the GitHub Actions token
+permissions:
+  contents: read
+
+# Jobs to be executed
+jobs:
+  # Job name
+  build-and-test:
+    # Operating system for the job runner
+    runs-on: ubuntu-latest
+
+    # Steps for the job
+    steps:
+      # 1. Clones the repository to the Actions runner
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Sets up the Node.js environment with version 20.x
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          # Caches dependencies to speed up future runs
+          cache: 'npm'
+
+      # 3. Installs project dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Runs the linter to check code quality
+      # The "lint" script must be defined in your package.json
+      - name: Run linter
+        run: npm run lint
+
+      # 5. Runs unit and integration tests
+      # The "test" script must be defined in your package.json
+      - name: Run tests
+        run: npm run test
+
+      # 6. (Optional, but recommended) Runs the application build to ensure it compiles
+      # The "build" script must be defined in your package.json
+      - name: Build application
+        run: npm run build
