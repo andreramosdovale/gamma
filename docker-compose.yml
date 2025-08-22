@@ -3,7 +3,7 @@ version: '3.8'
 services:
   # PostgreSQL Database Service
   postgres:
-    image: postgres:16-alpine
+    image: postgres:latest
     container_name: gamma_db
     restart: always
     environment:
