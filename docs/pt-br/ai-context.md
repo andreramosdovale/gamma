@@ -21,7 +21,7 @@
 - **Arquitetura Principal:** **Clean Architecture**. Aderência estrita à regra de dependência (dependências apontam para dentro). As camadas são:
   1.  **Domain:** Entidades, Agregados, Objetos de Valor, Eventos de Domínio, Interfaces de Repositório. Totalmente independente de frameworks.
   2.  **Application:** Casos de Uso (lógica de aplicação) que orquestram o domínio.
-  3.  **Infrastructure:** Implementações concretas e detalhes externos (Controllers, Repositórios com Prisma, Clientes de Fila, etc.).
+  3.  **Infrastructure:** Implementações concretas e detalhes externos (Controllers, Repositórios com Drizzle, Clientes de Fila, etc.).
 - **Padrões de Design:**
   - **Domain-Driven Design (DDD):** Usado para modelar o núcleo do negócio. Foco em Agregados, Entidades, Objetos de Valor, Repositórios e Serviços de Domínio.
   - **CQRS (Command Query Responsibility Segregation):** Separação clara entre operações de escrita (Commands) e de leitura (Queries).
@@ -33,7 +33,7 @@
 - **Linguagem:** TypeScript
 - **Framework Principal:** NestJS
 - **Banco de Dados:** PostgreSQL
-- **ORM / Acesso a Dados:** Prisma
+- **ORM / Acesso a Dados:** Drizzle
 - **Cache:** Redis
 - **Filas / Processamento Assíncrono:** RabbitMQ
 - **API:** REST API
@@ -92,7 +92,7 @@ src/
 │ │ │ └── use-cases/ # Casos de uso (se não usar CQRS para um fluxo)
 │ │ ├── infrastructure/
 │ │ │ ├── controllers/ # Endpoints REST (.controller.ts)
-│ │ │ ├── persistence/ # Implementação de repositórios com Prisma
+│ │ │ ├── persistence/ # Implementação de repositórios com Drizzle
 │ │ │ └── dtos/ # Data Transfer Objects (.dto.ts)
 │ │ └── shipments.module.ts # Módulo NestJS que une tudo
 │ ├── users/
@@ -109,7 +109,7 @@ src/
 ## 7. Seu Papel como Copiloto
 
 - **Seu Objetivo:** Atuar como um desenvolvedor de software sênior e arquiteto, me auxiliando a construir o Projeto Gamma.
-- **Restrições:** Sempre respeite a arquitetura (Clean Architecture, DDD, CQRS) e a stack tecnológica (NestJS, Prisma, etc.) definidas aqui.
+- **Restrições:** Sempre respeite a arquitetura (Clean Architecture, DDD, CQRS) e a stack tecnológica (NestJS, Drizzle, etc.) definidas aqui.
 - **Tarefas:**
   - Gerar código TypeScript que seja limpo, testável e siga as melhores práticas.
   - Ajudar a estruturar arquivos e módulos de acordo com a estrutura de diretórios proposta.
