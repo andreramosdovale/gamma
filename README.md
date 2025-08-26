@@ -2,9 +2,15 @@
 
 Project Gamma is a backend system for logistics management, designed as an in-depth study of modern software architectures in the **Node.js** ecosystem. The application is built as a **Modular Monolith** with **NestJS** and **TypeScript**, strictly applying the principles of **Clean Architecture**, **Domain-Driven Design (DDD)**, and **CQRS (Command Query Responsibility Segregation)**.
 
-The application handles asynchronous internal communication and task decoupling with **RabbitMQ**. The database interaction with **PostgreSQL** is managed by **Prisma ORM**, and high-performance caching is handled by **Redis**.
+The application handles asynchronous internal communication and task decoupling with **RabbitMQ**. The database interaction with **PostgreSQL** is managed by **Drizzle ORM**, and high-performance caching is handled by **Redis**.
 
 The project is test-oriented at all levels and features a CI/CD pipeline using **GitHub Actions**.
+
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=ts,nestjs,postgresql,rabbitmq,redis,docker,jest,githubactions" />
+</p>
+
+---
 
 ## 📚 Documentation
 
@@ -13,6 +19,8 @@ For a detailed explanation of the business domain, user roles, core entities, an
 - 🇧🇷 **[Documentação de Domínio e Regras de Negócio (PT-BR)](./docs/pt-br/rules.md)**
 - 🇬🇧 **[Domain and Business Rules Documentation (EN)](./docs/en/rules.md)**
 
+---
+
 ## ✨ Core Features
 
 - **Shipment Management**: Creation and lifecycle management of shipments.
@@ -20,6 +28,8 @@ For a detailed explanation of the business domain, user roles, core entities, an
 - **Route Planning**: Management of routes, trucks, and warehouses.
 - **User Control**: Role-based access control for Admins, Dispatchers, and Drivers.
 - **Asynchronous Processing**: Event-driven jobs for validation, notifications, and auditing.
+
+---
 
 ## 🛠️ Tech Stack & Architectural Patterns
 
@@ -38,7 +48,7 @@ This section details the modern, "overengineered" stack chosen to maximize learn
 ### Database & Persistence
 
 - **Relational Database**: **PostgreSQL**
-- **ORM / Query Builder**: **Prisma**
+- **ORM / Query Builder**: **Drizzle**
 - **Caching**: **Redis**, integrated via `@nestjs/cache-manager`.
 
 ### API & Asynchronous Communication
@@ -74,6 +84,8 @@ This section details the modern, "overengineered" stack chosen to maximize learn
 
 - **REST API**: Automatic documentation with **Swagger**, via `@nestjs/swagger`.
 
+---
+
 ## 🚀 Getting Started
 
 1.  **Clone the repository:**
@@ -91,12 +103,17 @@ This section details the modern, "overengineered" stack chosen to maximize learn
     ```bash
     docker-compose up -d
     ```
-5.  **Run the Prisma migrations:**
-    ```bash
-    npx prisma migrate dev
-    ```
+5.  **Run the Drizzle migrations:**
+    - First, generate the SQL migration file from your TypeScript schema:
+      ```bash
+      npm run db:generate
+      ```
+    - Then, apply the generated migration to the database:
+      ```bash
+      npm run db:migrate
+      ```
 6.  **Start the application in development mode:**
-    `bash
+    ```bash
     npm run start:dev
-    `
+    ```
     The application will be available at `http://localhost:3000`. The Swagger API documentation will be at `http://localhost:3000/api`.
